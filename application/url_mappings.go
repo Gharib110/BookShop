@@ -7,8 +7,8 @@ import (
 
 func mapURLS() {
 	// Ping Controllers
-	router.GET("ping-string", ping.PingString)
-	router.GET("/ping-json", ping.PingJSON)
+	router.GET("ping-string", ping.String)
+	router.GET("/ping-json", ping.Json)
 
 	// Users Controllers
 	router.GET("/users/:user_id", users.GetUser)

@@ -16,6 +16,7 @@ func FindUser(c *gin.Context) {
 	c.String(http.StatusNotImplemented, "implement me!")
 }
 
+// CreateUser Use for create new user it is the Controller
 func CreateUser(c *gin.Context) {
 	if c.Request.Header.Get("Content-Type") == "application/json" {
 		err := c.Request.ParseForm()

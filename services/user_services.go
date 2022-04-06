@@ -6,6 +6,9 @@ import (
 )
 
 func CreateUser(user *users.User) (*users.User, *errors.RestErr) {
-	// TODO: should be implemented
+	// TODO: The Logic should be implemented
+	if err := user.ValidateUser(); err != nil {
+		return nil, err
+	}
 	return user, nil
 }

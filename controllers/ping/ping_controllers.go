@@ -5,12 +5,12 @@ import (
 	"net/http"
 )
 
-func PingString(c *gin.Context) {
+func String(c *gin.Context) {
 	c.String(http.StatusOK, "Pong!")
 	return
 }
 
-func PingJSON(c *gin.Context) {
+func Json(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Pong!",
 	})
