@@ -5,6 +5,10 @@ import (
 	"github.com/Gharib110/bookstore_users_api/utils/errors"
 )
 
+func GetUser(userId int64) (*users.User, *errors.RestErr) {
+	return nil, nil
+}
+
 func CreateUser(user *users.User) (*users.User, *errors.RestErr) {
 	// TODO: The Logic should be implemented
 	if err := user.ValidateUser(); err != nil {

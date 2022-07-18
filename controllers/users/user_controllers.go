@@ -4,12 +4,26 @@ import (
 	"encoding/json"
 	"github.com/Gharib110/bookstore_users_api/domain/users"
 	"github.com/Gharib110/bookstore_users_api/services"
+	"github.com/Gharib110/bookstore_users_api/utils/errors"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
 func GetUser(c *gin.Context) {
-	c.String(http.StatusNotImplemented, "implement me!")
+	userId, userErr := strconv.ParseInt(c.Param("user_id"), 10, 64)
+	if userErr != nil {
+		err := errors.NewBadRequestError("invalid user id")
+		c.JSON(err.Code, err)
+		return
+	}
+	result, saveErr := services.GetUser(userId)
+	if saveErr != nil {
+		c.JSON(saveErr.Code, saveErr)
+		return
+	}
+	c.JSON(http.StatusCreated, result)
+	return
 }
 
 func FindUser(c *gin.Context) {
