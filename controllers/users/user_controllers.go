@@ -19,12 +19,6 @@ func FindUser(c *gin.Context) {
 // CreateUser Use for create new user it is the Controller
 func CreateUser(c *gin.Context) {
 	if c.Request.Header.Get("Content-Type") == "application/json" {
-		err := c.Request.ParseForm()
-		if err != nil {
-			c.JSON(http.StatusBadRequest, err.Error())
-			return
-		}
-
 		userData := &users.User{
 			ID:        0,
 			FirstName: "",
@@ -33,21 +27,19 @@ func CreateUser(c *gin.Context) {
 			CreatedAt: "",
 		}
 		decoder := json.NewDecoder(c.Request.Body)
-		err = decoder.Decode(userData)
+		err := decoder.Decode(userData)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, err.Error())
 			return
 		}
 
-		_, restErr := services.CreateUser(userData)
+		result, restErr := services.CreateUser(userData)
 		if restErr != nil {
 			c.JSON(restErr.Code, restErr)
 			return
 		}
 
-		c.JSON(http.StatusCreated, gin.H{
-			"message": "The User is Created!",
-		})
+		c.JSON(http.StatusCreated, result)
 		return
 	} else {
 		c.JSON(http.StatusUnsupportedMediaType, gin.H{
