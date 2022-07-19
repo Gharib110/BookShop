@@ -21,3 +21,8 @@ func (user *User) ValidateUser() *errors.RestErr {
 
 	return nil
 }
+
+const (
+	InsertQuery  = "INSERT INTO users(first_name, last_name, email, created_at) VALUES (?, ?, ?, ?)"
+	GetUserQuery = "SELECT id, first_name, last_name, email, created_at FROM users WHERE id=?"
+)

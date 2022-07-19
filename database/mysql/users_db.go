@@ -29,5 +29,5 @@ func init() {
 	UserDB.SetConnMaxLifetime(time.Minute * 3)
 	UserDB.SetMaxOpenConns(15)
 	UserDB.SetMaxIdleConns(10)
-	log.Println("We have connected to MYSQL")
+	log.Println("We have connected to MYSQL.")
 }
