@@ -49,3 +49,16 @@ func (user *User) Save() *errors.RestErr {
 	user.ID = userId
 	return nil
 }
+
+func (user *User) Update() *errors.RestErr {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*3)
+	defer cancel()
+
+	_, err := mysql2.UserDB.ExecContext(ctx, UpdateUserQuery,
+		user.FirstName, user.LastName, user.Email)
+	if err != nil {
+		return errors.NewInternalServerError(err.Error())
+	}
+
+	return nil
+}
