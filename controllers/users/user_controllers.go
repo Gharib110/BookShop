@@ -26,8 +26,31 @@ func GetUser(c *gin.Context) {
 	return
 }
 
-func FindUser(c *gin.Context) {
-	c.String(http.StatusNotImplemented, "implement me!")
+func UpdateUser(c *gin.Context) {
+	userId, userErr := strconv.ParseInt(c.Param("user_id"), 10, 64)
+	if userErr != nil {
+		err := errors.NewBadRequestError("invalid user id")
+		c.JSON(err.Code, err)
+		return
+	}
+
+	var user users.User
+	if err := c.BindJSON(&user); err != nil {
+		restErr := errors.NewBadRequestError("invalid JSON body")
+		c.JSON(restErr.Code, restErr)
+		return
+	}
+
+	user.ID = userId
+
+	result, err := services.UpdateUser(&user)
+	if err != nil {
+		c.JSON(err.Code, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, result)
+	return
 }
 
 // CreateUser Use for create new user it is the Controller

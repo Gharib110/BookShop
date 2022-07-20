@@ -12,6 +12,6 @@ func mapURLS() {
 
 	// Users Controllers
 	router.GET("/users/:user_id", users.GetUser)
-	router.GET("/users/search", users.FindUser)
+	router.PUT("/users/:user_id", users.UpdateUser)
 	router.POST("/users", users.CreateUser)
 }

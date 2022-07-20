@@ -6,7 +6,12 @@ import (
 )
 
 func GetUser(userId int64) (*users.User, *errors.RestErr) {
-	return nil, nil
+	result := &users.User{ID: userId}
+	if err := result.Get(userId); err != nil {
+		return nil, err
+	}
+
+	return result, nil
 }
 
 func CreateUser(user *users.User) (*users.User, *errors.RestErr) {
@@ -19,4 +24,13 @@ func CreateUser(user *users.User) (*users.User, *errors.RestErr) {
 		return nil, err
 	}
 	return user, nil
+}
+
+func UpdateUser(user *users.User) (*users.User, *errors.RestErr) {
+	current := users.User{ID: user.ID}
+	if err := current.Get(user.ID); err != nil {
+		return nil, err
+	}
+
+	return nil, nil
 }
