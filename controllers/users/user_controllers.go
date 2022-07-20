@@ -84,3 +84,20 @@ func CreateUser(c *gin.Context) {
 		})
 	}
 }
+
+func DeleteUser(c *gin.Context) {
+	userId, userErr := strconv.ParseInt(c.Param("user_id"), 10, 64)
+	if userErr != nil {
+		err := errors.NewBadRequestError("invalid user id")
+		c.JSON(err.Code, err)
+		return
+	}
+
+	if err := services.DeleteUser(userId); err != nil {
+		c.JSON(err.Code, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, map[string]string{"status": "deleted"})
+	return
+}

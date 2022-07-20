@@ -26,4 +26,5 @@ const (
 	InsertQuery     = "INSERT INTO users(first_name, last_name, email, created_at) VALUES (?, ?, ?, ?)"
 	GetUserQuery    = "SELECT id, first_name, last_name, email, created_at FROM users WHERE id=?"
 	UpdateUserQuery = "UPDATE users SET first_name=?, last_name=?, email=? WHERE id=?"
+	DeleteUserQuery = "DELETE FROM users WHERE id=?"
 )

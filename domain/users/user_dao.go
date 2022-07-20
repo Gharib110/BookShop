@@ -62,3 +62,15 @@ func (user *User) Update() *errors.RestErr {
 
 	return nil
 }
+
+func (user *User) Delete() *errors.RestErr {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*3)
+	defer cancel()
+
+	_, err := mysql2.UserDB.ExecContext(ctx, DeleteUserQuery, user.ID)
+	if err != nil {
+		return errors.NewInternalServerError(err.Error())
+	}
+
+	return nil
+}
