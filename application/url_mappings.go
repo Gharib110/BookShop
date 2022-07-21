@@ -1,8 +1,8 @@
 package application
 
 import (
-	"github.com/Gharib110/bookstore_users_api/controllers/ping"
-	"github.com/Gharib110/bookstore_users_api/controllers/users"
+	"github.com/Gharib110/BookShop/controllers/ping"
+	"github.com/Gharib110/BookShop/controllers/users"
 )
 
 func mapURLS() {
@@ -15,4 +15,6 @@ func mapURLS() {
 	router.PATCH("/users/:user_id", users.UpdateUser)
 	router.POST("/users", users.CreateUser)
 	router.DELETE("/users/:user_id", users.DeleteUser)
+	router.GET("/internal/users/search", users.SearchUser)
+	router.POST("/users/login", users.Login)
 }

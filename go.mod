@@ -1,4 +1,4 @@
-module github.com/Gharib110/bookstore_users_api
+module github.com/Gharib110/BookShop
 
 go 1.18
 
